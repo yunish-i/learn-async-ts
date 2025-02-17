@@ -27,12 +27,27 @@ for (let i = 0; i < array2D_1.length; i++) {
   rowSumPromises.push(sumOfARow(array2D_1, i));
 }
 
-Promise.all(rowSumPromises)
-  .then((rowSums) => {
+// Promise.all(rowSumPromises)
+//   .then((rowSums) => {
+//     let sum = 0;
+//     rowSums.forEach((rowSums) => {
+//       sum += rowSums;
+//     });
+//     console.log(`Sum: ${sum}`);
+//   })
+//   .catch((err) => console.log(`Error: ${err}`));
+
+async function getSum(): Promise<void> {
+  try {
+    const rowSums = await Promise.all(rowSumPromises);
     let sum = 0;
     rowSums.forEach((rowSums) => {
       sum += rowSums;
     });
     console.log(`Sum: ${sum}`);
-  })
-  .catch((err) => console.log(`Error: ${err}`));
+  } catch (err) {
+    console.log(`Error: ${err}`);
+  }
+}
+
+getSum();
