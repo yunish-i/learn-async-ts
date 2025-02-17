@@ -2,3 +2,48 @@
 - Is there a difference in the flow of execution from when the code was in the setTimeout function?
 - Is the flow of execution in both these examples different from the flow of execution with the examples using the fetch() API, which also returns a promise? 
 - If yes, explain the code execution difference. Add your explanation to this file.
+
+// The setTimeOut function would trigger asynchronous execution. The code outside setTimeOut is synchronous, and it will be executed sequentially, but the code in the setTimeOut function would execute after synchronous code finishes.
+// In this example, the code in the setTimeOut (adding up integers 1-9) would be executed at last. For promise1, since resolve(sum) is inside setTimeOut, the state of promise1 is pending until setTimeOut executes and .then() is called to resolve.
+// Run the script with setTimeOut:
+Sum called ... 
+returning from sum
+sumPromise1: Promise { <pending> }
+Sum called ... 
+returning from sum
+sumPromise2: Promise { <rejected> 'Cannot sum an empty array' }
+End of the script.
+Cannot sum an empty array
+Adding 1 to sum
+Adding 2 to sum
+Adding 3 to sum
+Adding 4 to sum
+Adding 5 to sum
+Adding 6 to sum
+Adding 7 to sum
+Adding 8 to sum
+Adding 9 to sum
+45
+
+// Without setTimeOut, the code execution is synchronous and sequential. The code of adding up integers would run when the function sum2DArray is called. Promise1 is fulfilled and promise2 is rejected immediately while the code executes sequentially.
+// Run the script without setTimeOut:
+Sum called ... 
+Adding 1 to sum
+Adding 2 to sum
+Adding 3 to sum
+Adding 4 to sum
+Adding 5 to sum
+Adding 6 to sum
+Adding 7 to sum
+Adding 8 to sum
+Adding 9 to sum
+returning from sum
+sumPromise1: Promise { 45 }
+Sum called ...
+returning from sum
+sumPromise2: Promise { <rejected> 'Cannot sum an empty array' }
+End of the script.
+45
+Cannot sum an empty array
+
+Fetch() API also enables asynchronous execution. If we use fetch() API, fetch would wait for server's response. And the promise that fetch returns would be resolved when the response is received and .then() is called.
