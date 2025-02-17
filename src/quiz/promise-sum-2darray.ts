@@ -27,6 +27,7 @@ for (let i = 0; i < array2D_1.length; i++) {
   rowSumPromises.push(sumOfARow(array2D_1, i));
 }
 
+// Do not use async await
 // Promise.all(rowSumPromises)
 //   .then((rowSums) => {
 //     let sum = 0;
@@ -37,6 +38,7 @@ for (let i = 0; i < array2D_1.length; i++) {
 //   })
 //   .catch((err) => console.log(`Error: ${err}`));
 
+//Use async await
 async function getSum(): Promise<void> {
   try {
     const rowSums = await Promise.all(rowSumPromises);
